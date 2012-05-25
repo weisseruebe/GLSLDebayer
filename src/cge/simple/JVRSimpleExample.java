@@ -1,7 +1,9 @@
 package cge.simple;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 
+import javax.imageio.ImageIO;
 import javax.media.opengl.GL2;
 import javax.media.opengl.GL2GL3;
 
@@ -56,7 +58,7 @@ public class JVRSimpleExample {
         light.setTransform(Transform.translate(3, 0, 3));
 
         CameraNode camera = new CameraNode("camera", 4f / 3f, 60);
-        camera.setTransform(Transform.translate(0, 0, 3));
+        camera.setTransform(Transform.translate(0, 0, 10));
         t.addChildNode(box);
         float scale = 4.7f;
         t.setTransform(Transform.scale(scale,scale/1.5f,1));
@@ -75,12 +77,15 @@ public class JVRSimpleExample {
 
         ShaderMaterial boardMat = new ShaderMaterial();
         boardMat.setShaderProgram("LIGHTING", lightingProgram);
-        boardMat.setTexture("LIGHTING", "source", new Texture2D(new File("res/raw.png")));
-
+        boardMat.setTexture("LIGHTING", "source", new Texture2D(new File("res/igel.jpg")));
+        BufferedImage f = ImageIO.read(new File("res/igel.jpg"));
+        float w = f.getWidth();
+        float h = f.getHeight();
+        
         Finder.find(t, ShapeNode.class, "Plane01_Shape").setMaterial(boardMat);
         
         Pipeline pipeline = new Pipeline(root);
-        pipeline.setUniform("sourceSize", new UniformVector4(new Vector4(800,533,1/800f,1/533f)));
+        pipeline.setUniform("sourceSize", new UniformVector4(new Vector4(w,h,1/w,1/h)));
         pipeline.setUniform("firstRed", new UniformVector2(new Vector2(1,1)));
 
         pipeline.clearBuffers(true, true, new Color(0, 0, 0));
@@ -90,7 +95,7 @@ public class JVRSimpleExample {
         pipeline.doLightLoop(true, true).drawGeometry("LIGHTING",null);
 
         InputState input = new InputState();
-        RenderWindow win = new AwtRenderWindow(pipeline, 800, 600);
+        RenderWindow win = new AwtRenderWindow(pipeline, (int)w, (int)h);
         win.addKeyListener(input);
 
         StopWatch time = new StopWatch();

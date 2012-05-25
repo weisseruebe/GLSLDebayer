@@ -71,15 +71,15 @@ void main(void) {
 	PATTERN.xz += kF.xz * F;
 	
 	gl_FragColor.rgb = (alternate.y == 0.0) ?
-					((alternate.x == 0.0) ?
-						vec3(C, PATTERN.xy) :
-						vec3(PATTERN.z, C, PATTERN.w)) :
-					((alternate.x == 0.0) ?
-						vec3(PATTERN.w, C, PATTERN.z) :
-						vec3(PATTERN.yx, C));
+							((alternate.x == 0.0) ?
+								vec3(C, PATTERN.xy) :
+								vec3(PATTERN.z, C, PATTERN.w)) :
+							((alternate.x == 0.0) ?
+								vec3(PATTERN.w, C, PATTERN.z) :
+								vec3(PATTERN.yx, C));
 						
 	//gl_FragColor = texture2D(source, vec2(center.x, center.y));
-	//gl_FragColor = Dvec;
+	//gl_FragColor = C;
 		//gl_FragColor = vec4(center.x, center.y,1,1);
 	
 }

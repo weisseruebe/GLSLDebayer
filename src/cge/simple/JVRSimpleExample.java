@@ -48,7 +48,7 @@ public class JVRSimpleExample {
     public static void main(String[] args) throws Exception {
         GroupNode root = new GroupNode("scene root");
         GroupNode t = new GroupNode("t");
-        SceneNode box = ColladaLoader.load(new File("plane.dae"));
+        SceneNode box = ColladaLoader.load(new File("res/plane.dae"));
         PointLightNode light = new PointLightNode("sun");
         light.setEnabled(true);
         light.setAmbientColor(new Color(1,1,1));
@@ -65,8 +65,8 @@ public class JVRSimpleExample {
         Printer.print(root);
     
         ShaderProgram lightingProgram = new ShaderProgram( 
-                new File("malvar.vs"),
-                new File("malvar.fs"));  
+                new File("shader/malvar.vs"),
+                new File("shader/malvar.fs"));  
     
         lightingProgram.setParameter(GL2GL3.GL_GEOMETRY_VERTICES_OUT_ARB, 40);
         lightingProgram.setParameter(GL2GL3.GL_GEOMETRY_INPUT_TYPE_ARB,	GL2.GL_TRIANGLE_STRIP);
@@ -75,7 +75,7 @@ public class JVRSimpleExample {
 
         ShaderMaterial boardMat = new ShaderMaterial();
         boardMat.setShaderProgram("LIGHTING", lightingProgram);
-        boardMat.setTexture("LIGHTING", "source", new Texture2D(new File("raw.png")));
+        boardMat.setTexture("LIGHTING", "source", new Texture2D(new File("res/raw.png")));
 
         Finder.find(t, ShapeNode.class, "Plane01_Shape").setMaterial(boardMat);
         

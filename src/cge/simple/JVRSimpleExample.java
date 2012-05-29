@@ -77,8 +77,8 @@ public class JVRSimpleExample {
 
         ShaderMaterial boardMat = new ShaderMaterial();
         boardMat.setShaderProgram("LIGHTING", lightingProgram);
-        boardMat.setTexture("LIGHTING", "source", new Texture2D(new File("res/igel.jpg")));
-        BufferedImage f = ImageIO.read(new File("res/igel.jpg"));
+        boardMat.setTexture("LIGHTING", "source", new Texture2D(new File("rawConvTest.png")));
+        BufferedImage f = ImageIO.read(new File("rawConvTest.png"));
         float w = f.getWidth();
         float h = f.getHeight();
         
